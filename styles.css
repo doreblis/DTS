@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #000000;
+  }
+  
+  .dice_table {
+    display: block;
+    background-color: #000000;
+  }
+  
+  .roll_dice_btn {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-family: monospace;
+    font-weight: bolder;
+    margin: 10px;
+    padding: 3px;
+    color: #ffffff;
+    background-color: #ff1709;
+    border: solid 3px #940f02;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .dice {
+    display: table;
+    background-color: #ff1709;
+    border: 3px solid #940f02;
+    border-radius: 10%;
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    padding: 3px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .dice_side {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .dice_side>.top,
+  .middle,
+  .bottom {
+    display: table;
+    margin: 0 auto;
+    visibility: hidden;
+  }
+  
+  .dice_side>.dot_row>.d_dot {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    background-color: #fdfefe;
+    border: solid 1px #bbb;
+    border-radius: 50%;
+    margin: 3px;
+  }
+  
+  .one>.middle>.d_dot:nth-of-type(2n+2) {
+    visibility: visible;
+  }
+  
+  .two>.top>.d_dot:nth-of-type(3n+1),
+  .two>.bottom>.d_dot:nth-of-type(1n+3) {
+    visibility: visible;
+  }
+  
+  .three>.top>.d_dot:nth-of-type(3n+1),
+  .three>.middle>.d_dot:nth-of-type(2n+2),
+  .three>.bottom>.d_dot:nth-of-type(1n+3) {
+    visibility: visible;
+  }
+  
+  .four>.top>.d_dot:nth-of-type(2n+1),
+  .four>.bottom>.d_dot:nth-of-type(2n+1) {
+    visibility: visible;
+  }
+  
+  .five>.top>.d_dot:nth-of-type(2n+1),
+  .five>.middle>.d_dot:nth-of-type(2n+2),
+  .five>.bottom>.d_dot:nth-of-type(2n+1) {
+    visibility: visible;
+  }
+  
+  .six>.top>.d_dot:nth-of-type(2n+1),
+  .six>.middle>.d_dot:nth-of-type(2n+1),
+  .six>.bottom>.d_dot:nth-of-type(2n+1) {
+    visibility: visible;
+  }
