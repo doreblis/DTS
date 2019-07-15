@@ -117,79 +117,81 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"index.js":[function(require,module,exports) {
+(function () {
+  "use strict";
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
+  var fetchId = function fetchId(e_id) {
+    var element = document.getElementById(e_id);
+    return element;
   };
 
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
+  var fetchClassIn = function fetchClassIn(e_class, e_parent) {
+    var elements = e_parent.getElementsByClassName(e_class);
 
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
+    if (elements.length > 1) {
+      return elements;
+    } else {
+      return elements[0];
     }
+  };
 
-    cssTimeout = null;
-  }, 50);
-}
+  var changeSide = function changeSide(element, new_class) {
+    var sides_reg = /(one|two|three|four|five|six)/g;
+    var roll_class = element.className.replace(sides_reg, new_class);
+    element.className = roll_class;
+  };
 
-module.exports = reloadCSS;
-},{"./bundle-url":"../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/bundle-url.js"}],"styles.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
+  var pickDice = function pickDice(dice_id) {
+    var $dice = fetchId(dice_id);
+    var $dice_side = fetchClassIn("dice_side", $dice);
+    return $dice_side;
+  };
 
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/css-loader.js"}],"../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  var Dice = function Dice(dice_name) {
+    this.dice = pickDice(dice_name);
+    this.sides = 6;
+
+    this.roll = function () {
+      var rand_num = Math.floor(Math.random() * this.sides) + 1;
+
+      switch (rand_num) {
+        case 1:
+          changeSide(this.dice, "one");
+          break;
+
+        case 2:
+          changeSide(this.dice, "two");
+          break;
+
+        case 3:
+          changeSide(this.dice, "three");
+          break;
+
+        case 4:
+          changeSide(this.dice, "four");
+          break;
+
+        case 5:
+          changeSide(this.dice, "five");
+          break;
+
+        case 6:
+          changeSide(this.dice, "six");
+      }
+    };
+  };
+
+  var dice_one = new Dice("dice_one");
+  var dice_two = new Dice("dice_two");
+  var $roll_dice_btn = fetchId("roll_dice");
+
+  $roll_dice_btn.onclick = function () {
+    dice_one.roll();
+    dice_two.roll();
+  };
+})();
+},{}],"../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -392,5 +394,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/styles.8986bff4.js.map
+},{}]},{},["../../AppData/Roaming/npm-cache/_npx/9456/node_modules/parcel/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/DTS.e31bb0bc.js.map
